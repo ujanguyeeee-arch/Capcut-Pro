@@ -1,14 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
 <head>
-    <title>Halaman Download</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan - Adi & Sari</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f5f0;
+            color: #333;
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path fill="%23f0e6d6" opacity="0.3" d="M0,0 L100,0 L100,100 Z" /></svg>');
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, #d4a574, #b08d5f, #d4a574);
+        }
+        
+        .couple-names {
+            font-size: 2.8rem;
+            color: #b08d5f;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-family: 'Georgia', serif;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #777;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+        
+        .invitation-card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 1px solid #f0e6d6;
+        }
+        
+        .card-title {
+            color: #b08d5f;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed #e8d9c5;
+        }
+        
+        .event-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+        
+        .detail-item {
+            flex-basis: 45%;
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fcf9f5;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .detail-icon {
+            font-size: 2.5rem;
+            color: #b08d5f;
+            margin-bottom: 10px;
+        }
+        
+        .detail-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .download-section {
+            background-color: #fcf9f5;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border: 1px solid #f0e6d6;
+        }
+        
+        .download-title {
+            color: #b08d5f;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .download-description {
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(to right, #d4a574, #b08d5f);
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(176, 141, 95, 0.3);
+            border: none;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(176, 141, 95, 0.4);
+            background: linear-gradient(to right, #b08d5f, #9c7c52);
+        }
+        
+        .download-btn i {
+            margin-right: 10px;
+        }
+        
+        .file-info {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .preview-section {
+            margin-bottom: 40px;
+        }
+        
+        .preview-title {
+            color: #b08d5f;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .preview-image {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 8px solid white;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #888;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+            margin-top: 20px;
+        }
+        
+        .heart {
+            color: #e74c3c;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.2); }
+            10% { transform: scale(1.1); }
+            15% { transform: scale(1.3); }
+            50% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        
+        @media (max-width: 768px) {
+            .couple-names {
+                font-size: 2.2rem;
+            }
+            
+            .event-details {
+                flex-direction: column;
+            }
+            
+            .detail-item {
+                flex-basis: 100%;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .invitation-card, .download-section {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1 class="couple-names">Adi & Sari</h1>
+            <p class="subtitle">Dengan penuh syukur dan kebahagiaan, kami mengundang Anda untuk hadir dalam acara pernikahan kami</p>
+        </header>
+        
+        <section class="invitation-card">
+            <h2 class="card-title">Detail Acara</h2>
+            <div class="event-details">
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3 class="detail-title">Tanggal & Waktu</h3>
+                    <p>Sabtu, 15 Juni 2024</p>
+                    <p>Pukul 10.00 WIB - Selesai</p>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="detail-title">Lokasi</h3>
+                    <p>Gedung Serbaguna Mutiara</p>
+                    <p>Jl. Kenangan Indah No. 123, Jakarta Selatan</p>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="detail-title">Akad Nikah</h3>
+                    <p>Minggu, 16 Juni 2024</p>
+                    <p>Pukul 08.00 WIB - Masjid Al-Ikhlas</p>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="detail-title">Pasangan</h3>
+                    <p>Adi Pratama</p>
+                    <p>&</p>
+                    <p>Sari Lestari</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="preview-section">
+            <h2 class="preview-title">Pratinjau Undangan</h2>
+            <div style="text-align: center;">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Preview Undangan Pernikahan" class="preview-image">
+            </div>
+        </section>
+        
+        <section class="download-section">
+            <h2 class="download-title">Unduh Undangan</h2>
+            <p class="download-description">Silahkan unduh undangan pernikahan kami dalam format PDF untuk keperluan Anda. File ini dapat dicetak atau disimpan sebagai kenang-kenangan.</p>
+            
+            <button class="download-btn" id="downloadButton">
+                <i class="fas fa-download"></i> Unduh Undangan (PDF)
+            </button>
+            
+            <p class="file-info">Ukuran file: 2.1 MB | Format: PDF</p>
+        </section>
+        
+        <footer>
+            <p>Terima kasih atas doa dan restu yang diberikan. <span class="heart">❤</span></p>
+            <p>© 2024 Undangan Pernikahan Adi & Sari. Dibuat dengan penuh cinta.</p>
+        </footer>
+    </div>
 
-    <h1>Unduh Program Simulasi</h1>
-    <p><strong>PERINGATAN:</strong> Program ini hanya untuk tujuan edukasi. Jalankan di lingkungan yang terisolasi.</p>
-
-    <a href="https://ujang-example.github.io/simulasi-edukasi-ransomware/ransomware_sim.exe" download="ransomware_sim.exe" class="download-button">
-        <button>Download Disini </button>
-    </a>
-
+    <script>
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            // Simulasi proses download
+            const button = this;
+            const originalText = button.innerHTML;
+            
+            // Mengubah teks tombol untuk menunjukkan proses
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengunduh...';
+            button.disabled = true;
+            
+            // Simulasi waktu download (3 detik)
+            setTimeout(function() {
+                // Membuat elemen link untuk download
+                const link = document.createElement('a');
+                link.href = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
+                link.download = 'Undangan_Pernikahan_Adi_Sari.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Mengembalikan tombol ke keadaan semula
+                button.innerHTML = '<i class="fas fa-check"></i> Unduhan Selesai!';
+                
+                // Setelah 2 detik, kembalikan ke tampilan awal
+                setTimeout(function() {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                }, 2000);
+                
+            }, 3000);
+        });
+        
+        // Menambahkan efek animasi pada elemen detail saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            const detailItems = document.querySelectorAll('.detail-item');
+            
+            detailItems.forEach((item, index) => {
+                // Menunda animasi untuk setiap item
+                setTimeout(() => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                    
+                    // Trigger reflow untuk memastikan animasi berjalan
+                    item.offsetHeight;
+                    
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, 300 + (index * 200));
+            });
+        });
+    </script>
 </body>
 </html>
